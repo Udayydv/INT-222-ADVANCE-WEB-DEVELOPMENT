@@ -1,0 +1,16 @@
+/*If i want to use these values ,
+    then i will use import fxn in the main file*/
+
+//its a named export    
+export const a = 1
+export const b = 2
+export const c = 3
+export const d = 4
+export const e= 5
+
+//DEFAULT EXPORT
+let obj;
+export default obj = {
+    x:5,
+    y:7
+}
