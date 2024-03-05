@@ -1,0 +1,89 @@
+//HTML PART
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>To check the post request</title>
+</head>
+<body>
+    <script>
+        async function testport(){
+            let a = await fetch("/",{method : "DELETE"})
+            let b = await a.text()
+            console.log(b)
+        }
+        testport()
+    </script>
+    
+</body>
+</html>
+
+//EXPRESS PART
+1)ROUTER
+//Express router are used to organise different data
+const express = require('express')
+const router = express.Router()
+
+
+// define the home page route
+router.get('/', (req, res) => {
+    res.send('Birds home page')
+})
+// define the about route
+router.get('/about', (req, res) => {
+    res.send('About blog')
+})
+
+router.get('//blogpost/:slug', (req, res) => {
+    res.send('fetch the blogpost for ${req.params.slug}')
+})
+
+module.exports = router
+
+2)const express = require('express')
+const birds = require('./routes/blog')
+
+const app = express()
+const port = 3000
+
+app.use('/blog', blog)
+
+//To use post request we use
+app.use(express.static("public"))
+
+app.get('/', (req, res) => {
+    console.log("Hey its a post request")
+    res.send('Hello')
+})
+
+//To test post request we have made and HTML page.
+
+app.post('/', (req, res) => {
+    console.log("Hey its a post request")
+    res.send('Hello world post')
+})
+
+//Testing of Put resquest
+app.put('/', (req, res) => {
+    console.log("Hey its a put request")
+    res.send('Hello world put')
+})
+
+//Testing of delete request
+app.delete('/', (req, res) => {
+    console.log("Hey its a delete request")
+    res.send('Hello world delete')
+})
+
+
+
+app.listen(port, () => {
+    console.log(`Example app listening on port ${port}`)
+})
+
+//Get request: Browser by default jis request ko use karta hai wo get request hi hoti hai.
+
+//Post request: If you want to share some personal infromation like username and password of something then we use post request.
+
+//Put request: It is used for updation.
